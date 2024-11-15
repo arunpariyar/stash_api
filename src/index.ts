@@ -30,5 +30,8 @@ server.use((req: Request, res: Response, next: NextFunction) => {
 //---- Using Routes ----
 server.use("/api/v1/users", userRouter);
 server.use("/api/v1/transactions", transactionsRouter);
+server.use("/health", (req, res) => {
+  res.send({ message: "I am alive" });
+});
 
 export default server;
