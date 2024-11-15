@@ -3,11 +3,15 @@
   "version": "1.0.0",
   "description": "stash app api with express js",
   "main": "index.js",
+  "prisma": {
+    "seed": "ts-node src/prisma/seed.ts"
+  },
   "scripts": {
     "build": "rimraf dist && npm i && npx prisma generate --schema=./src/prisma/schema.prisma && npx prisma migrate dev --name init --schema ./src/prisma/schema.prisma && npx tsc",
-    "prestart": "npm run build",
-    "start": " concurrently \"npx tsc -w\" \" nodemon  dist/server.js\"",
-    "local": "node dist/server.js"
+    "prestart": "npm run build && npx prisma db seed",
+    "start": "node dist/server.js ",
+    "preserve": "npm run build",
+    "serve": "concurrently \"npx tsc -w \" \" nodemon dist/server.js\""
   },
   "author": "arun pariyar",
   "license": "ISC",
@@ -22,7 +26,8 @@
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "jsonwebtoken": "^9.0.2",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "tsc-watch": "^6.2.0"
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
