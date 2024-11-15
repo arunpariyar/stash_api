@@ -10,6 +10,6 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "moduleResolution": "Node16"
   },
-  "exclude": ["node_modules"]
-  // "include": ["src/**/*.ts"]
+  "exclude": ["node_modules"],
+  "include": ["src/**/*.ts"]
 }

@@ -1,25 +1,25 @@
 //---- Libraries ----
-import express, { Request, Response, Express, NextFunction } from 'express';
+import express, { Request, Response, Express, NextFunction } from "express";
 
 //----Middleware----
-import morgan from 'morgan';
-import cors from 'cors';
+import morgan from "morgan";
+import cors from "cors";
 
 //---- Routes ----
-import userRouter from './routes/userRoutes';
-import transactionsRouter from './routes/transactionsRoutes';
+import userRouter from "./routes/userRoutes";
+import transactionsRouter from "./routes/transactionsRoutes";
 
 const server: Express = express();
 
 //CORS CONFIGURATION
 const corsConfig = {
-  origin: 'http://localhost:5173',
+  origin: ["http://localhost:5173"],
 };
 
 //using middlewares
-server.use(morgan('common'));
+server.use(morgan("common"));
 server.use(express.json());
-server.use(cors(corsConfig));
+server.use(cors());
 
 // this is just to understand middleware
 server.use((req: Request, res: Response, next: NextFunction) => {
@@ -28,7 +28,7 @@ server.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 //---- Using Routes ----
-server.use('/api/users', userRouter);
-server.use('/api/transactions', transactionsRouter);
+server.use("/api/v1/users", userRouter);
+server.use("/api/v1/transactions", transactionsRouter);
 
 export default server;

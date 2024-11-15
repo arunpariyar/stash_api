@@ -22,3 +22,13 @@ model User {
   password String
   passwordChangedAt DateTime? @default(now())
 }
+
+model Transaction {
+  id String @id @default(uuid())
+  avatar String
+  name String
+  category String
+  date DateTime? @default(now())
+  amount Decimal
+  recurring Boolean
+}
