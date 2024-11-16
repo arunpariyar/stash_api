@@ -30,7 +30,7 @@ server.use((req: Request, res: Response, next: NextFunction) => {
 //---- Using Routes ----
 server.use("/api/v1/users", userRouter);
 server.use("/api/v1/transactions", transactionsRouter);
-server.use("/health", (req, res) => {
+server.use("/health", (req: Request, res: Response) => {
   res.send({ message: "I am alive" });
 });
 
