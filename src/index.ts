@@ -14,7 +14,10 @@ const server: Express = express();
 
 //CORS CONFIGURATION
 const corsConfig = {
-  origin: ["http://localhost:5173"],
+  origin: [
+    "http://localhost:5173",
+    "https://main.d2n81n8tjx6dgr.amplifyapp.com",
+  ],
 };
 
 //using middlewares
