@@ -8,6 +8,7 @@ import cors from "cors";
 //---- Routes ----
 import userRouter from "./routes/userRoutes";
 import transactionsRouter from "./routes/transactionsRoutes";
+import potsRouter from "./routes/potsRoutes";
 
 const server: Express = express();
 
@@ -30,8 +31,13 @@ server.use((req: Request, res: Response, next: NextFunction) => {
 //---- Using Routes ----
 server.use("/api/v1/users", userRouter);
 server.use("/api/v1/transactions", transactionsRouter);
+
+//API Versioning for V2
+server.use("/api/v2/transactions", transactionsRouter);
+server.use("/api/v2/pots", potsRouter);
+
 server.use("/health", (req: Request, res: Response) => {
-  res.send({ message: "I am alive" });
+  res.send({ message: "Server up and running" });
 });
 
 export default server;
