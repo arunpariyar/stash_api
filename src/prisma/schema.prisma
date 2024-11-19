@@ -32,3 +32,11 @@ model Transaction {
   amount Decimal
   recurring Boolean
 }
+
+model Pot{
+  id String @id @default(uuid())
+  name String
+  target Decimal
+  total Decimal
+  theme String
+}

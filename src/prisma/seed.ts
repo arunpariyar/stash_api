@@ -9,6 +9,12 @@ async function main() {
   for (const transaction of mockData.transactions) {
     await prisma.transaction.create({ data: transaction });
   }
+
+  await prisma.pot.deleteMany();
+
+  for (const pot of mockData.pots) {
+    await prisma.pot.create({ data: pot });
+  }
 }
 
 main()
