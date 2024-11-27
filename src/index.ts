@@ -11,6 +11,7 @@ import transactionsRouter from "./routes/transactionsRoutes";
 import potsRouter from "./routes/potsRoutes";
 
 const server: Express = express();
+server.use(express.json());
 
 //CORS CONFIGURATION
 const corsConfig = {
