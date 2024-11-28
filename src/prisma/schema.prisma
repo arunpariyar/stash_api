@@ -21,6 +21,7 @@ model User {
   email String  @unique
   password String
   passwordChangedAt DateTime? @default(now())
+  date DateTime? @default(now())
 }
 
 model Transaction {
@@ -39,4 +40,5 @@ model Pot{
   target Decimal
   total Decimal
   theme String
+  createdAt DateTime? @default(now())
 }

@@ -3,7 +3,9 @@ import prisma from "../config/db";
 
 const getAllPots = async (req: Request, res: Response) => {
   try {
-    const pots = await prisma.pot.findMany();
+    const pots = await prisma.pot.findMany({
+      orderBy: { name: "asc" },
+    });
 
     res.json({
       error: false,
