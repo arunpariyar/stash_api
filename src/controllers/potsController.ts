@@ -42,10 +42,10 @@ const deletePot = async (req: Request, res: Response) => {
       .json({ error: false, message: "Pot deleted successfully", deletedPot });
   } catch (error: unknown) {
     if (error instanceof Error) {
-      if ((error as any) === "P2025") {
+      if ((error as any).code === "P2025") {
         return res.status(404).json({
           error: true,
-          message: error.message,
+          message: "Pot cannot be found",
         });
       }
     }
