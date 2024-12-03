@@ -17,6 +17,27 @@ const getAllPots = async (req: Request, res: Response) => {
   }
 };
 
+const getOnePot = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const pot = await prisma.pot.findUnique({ where: { id: id } });
+
+    if (pot) {
+      return res.json({
+        error: false,
+        body: pot,
+      });
+    }
+
+    return res.status(404).json({
+      error: true,
+      message: "Pot Not Found",
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const createPot = async (req: Request, res: Response) => {
   try {
     const pot = req.body;
@@ -52,10 +73,37 @@ const deletePot = async (req: Request, res: Response) => {
   }
 };
 
+const updatePot = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const updates = req.body;
+
+  try {
+    const pot = await prisma.pot.findUnique({
+      where: {
+        id: id,
+      },
+    });
+
+    if (pot) {
+      const updatedPot = await prisma.pot.update({
+        where: { id: id },
+        data: updates,
+      });
+
+      res.status(200).json(updatedPot);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(400).json("There was an unexpected problem!");
+  }
+};
+
 const potController = {
   getAllPots,
   createPot,
   deletePot,
+  updatePot,
+  getOnePot,
 };
 
 export default potController;

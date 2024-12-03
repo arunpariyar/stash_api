@@ -8,7 +8,11 @@ potsRouter
   .get(potController.getAllPots)
   .post(potController.createPot);
 
-potsRouter.route("/:id").delete(potController.deletePot);
+potsRouter
+  .route("/:id")
+  .get(potController.getOnePot)
+  .delete(potController.deletePot)
+  .patch(potController.updatePot);
 //TODO add the protection to the route at a latter time .get(protectRoute, transactionsController.getAllTransactions);
 
 export default potsRouter;
