@@ -74,8 +74,9 @@ const deletePot = async (req: Request, res: Response) => {
 };
 
 const updatePot = async (req: Request, res: Response) => {
-  const { id } = req.params;
   const updates = req.body;
+  const { id } = updates;
+  console.log(id);
 
   try {
     const pot = await prisma.pot.findUnique({
