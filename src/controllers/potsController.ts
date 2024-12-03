@@ -28,9 +28,34 @@ const createPot = async (req: Request, res: Response) => {
   }
 };
 
+const deletePot = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const deletedPot = await prisma.pot.delete({
+      where: {
+        id,
+      },
+    });
+
+    res
+      .status(200)
+      .json({ error: false, message: "Pot deleted successfully", deletedPot });
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      if ((error as any).code === "P2025") {
+        return res.status(404).json({
+          error: true,
+          message: "Pot cannot be found",
+        });
+      }
+    }
+  }
+};
+
 const potController = {
   getAllPots,
   createPot,
+  deletePot,
 };
 
 export default potController;
