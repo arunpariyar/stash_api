@@ -6,14 +6,13 @@ const potsRouter: Router = express.Router();
 potsRouter
   .route("/")
   .get(potController.getAllPots)
-  .post(potController.createPot)
-  .patch(potController.updatePot);
+  .post(potController.createPot);
 
 potsRouter
   .route("/:id")
   .get(potController.getOnePot)
-  .delete(potController.deletePot);
-
+  .delete(potController.deletePot)
+  .patch(potController.updatePot);
 //TODO add the protection to the route at a latter time .get(protectRoute, transactionsController.getAllTransactions);
 
 export default potsRouter;
