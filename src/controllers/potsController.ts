@@ -99,12 +99,64 @@ const updatePot = async (req: Request, res: Response) => {
   }
 };
 
+const addMoneyToPot = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  //TODO it import to make sure that this amount in not negative and when added doesn't exceed target of the pot
+  const { amount } = req.body;
+
+  try {
+    const pot = await prisma.pot.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    if (pot) {
+      const updatedTotal = Number(pot.total) + Number(amount);
+      const updatedPot = await prisma.pot.update({
+        where: { id: id },
+        data: { ...pot, total: updatedTotal },
+      });
+      res.status(200).json(updatedPot);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(400).json("There was an unexpected problem!");
+  }
+};
+
+const withdrawFromPot = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  //TODO it import to make sure that this amount in not more than the existing total
+  const { amount } = req.body;
+
+  try {
+    const pot = await prisma.pot.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    if (pot) {
+      const updatedTotal = Number(pot.total) - Number(amount);
+      const updatedPot = await prisma.pot.update({
+        where: { id: id },
+        data: { ...pot, total: updatedTotal },
+      });
+      res.status(200).json(updatedPot);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(400).json("There was an unexpected problem!");
+  }
+};
+
 const potController = {
   getAllPots,
   createPot,
   deletePot,
   updatePot,
   getOnePot,
+  addMoneyToPot,
+  withdrawFromPot,
 };
 
 export default potController;
