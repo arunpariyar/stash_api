@@ -15,4 +15,9 @@ potsRouter
   .patch(potController.updatePot);
 //TODO add the protection to the route at a latter time .get(protectRoute, transactionsController.getAllTransactions);
 
+potsRouter.route("/:id/add").post(potController.addMoneyToPot);
+potsRouter.route("/:id/withdraw").post(potController.withdrawFromPot);
+
+//TODO add the protection to the route at a latter time .get(protectRoute, transactionsController.getAllTransactions);
+
 export default potsRouter;
