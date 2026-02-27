@@ -15,10 +15,7 @@ server.use(express.json());
 
 //CORS CONFIGURATION
 const corsConfig = {
-  origin: [
-    "http://localhost:5173",
-    "https://main.d2n81n8tjx6dgr.amplifyapp.com",
-  ],
+  origin: ["http://localhost:4200", "https://ng-stash.vercel.app"],
 };
 
 //using middlewares
